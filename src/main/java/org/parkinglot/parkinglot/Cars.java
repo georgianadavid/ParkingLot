@@ -1,17 +1,24 @@
 package org.parkinglot.parkinglot;
 
+import jakarta.inject.Inject;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import org.parkinglot.parkinglot.common.CarDto;
+import org.parkinglot.parkinglot.ejb.CarsBean;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "Cars", value = "/Cars")
 public class Cars extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws
             ServletException, IOException {
-        //request.setAttribute("numberOfFreeParkingSpots", 10);
+        List<CarDto> cars = carsBean.findAllCars();
+        request.setAttribute("cars", cars);
+        request.setAttribute("numberOfFreeParkingSpots", 10);
         request.setAttribute("page", "Cars");
         request.getRequestDispatcher("/WEB-INF/pages/cars.jsp").forward(request,response);
     }
@@ -20,4 +27,7 @@ public class Cars extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws
             ServletException, IOException {
     }
+
+    @Inject
+    CarsBean carsBean;
 }
