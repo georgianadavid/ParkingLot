@@ -5,7 +5,7 @@ import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
-import org.example.parkinglot.entities.User;
+import org.parkinglot.parkinglot.entities.User;
 import org.parkinglot.parkinglot.common.UserDto;
 
 
